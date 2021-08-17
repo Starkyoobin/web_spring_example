@@ -10,8 +10,18 @@ import com.starkyb.spring.lesson03.model.Review;
 public class ReviewBO {
 	@Autowired
 	private ReviewDAO reviewDAO;
-	
+	//select
 	public Review getReview(int id) {
 		return reviewDAO.selectReview(id);
+	}
+	
+	//insert
+	//storeId, menu, userName, point, review
+	public int addReview(int storeId, String menu, String userName, double point, String review) {
+		return reviewDAO.insertReview(storeId, menu, userName, point, review);
+	}
+	
+	public int addReviewAsObject(Review review) {
+		return reviewDAO.insertReviewAsObject(review);
 	}
 }

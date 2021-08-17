@@ -7,5 +7,16 @@ import com.starkyb.spring.lesson03.model.Review;
 
 @Repository
 public interface ReviewDAO {
+	//select
 	public Review selectReview(@Param("id") int id);
+	//insert
+	public int insertReview(
+			@Param("storeId") int storeId
+			, @Param("menu") String menu
+			, @Param("userName") String userName
+			, @Param("point") double point
+			, @Param("review") String review
+			);
+	
+	public int insertReviewAsObject(Review review);
 }
