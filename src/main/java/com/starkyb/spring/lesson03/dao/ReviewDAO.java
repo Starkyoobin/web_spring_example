@@ -19,4 +19,10 @@ public interface ReviewDAO {
 			);
 	
 	public int insertReviewAsObject(Review review);
+	
+	//update
+	public int updateReviewById(@Param("id") int id, @Param("review") String review);
+	
+	//delete
+	public int deleteReview(@Param("id") int id);
 }
