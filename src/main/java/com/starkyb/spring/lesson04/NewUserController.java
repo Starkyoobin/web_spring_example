@@ -2,6 +2,7 @@ package com.starkyb.spring.lesson04;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +38,15 @@ public class NewUserController {
 	
 	//가장 최근에 등록된 사용자 정보 출력
 	 @GetMapping("/ex01/2")
-	 @ResponseBody
-	 public NewUser lastUser() {
-		 return newUserBO.getLastUser();
+//	 @ResponseBody
+	 public String lastUser(Model model) {	//view (.jsp)에 데이터를 전달하는 매개체
+		 NewUser user = newUserBO.getLastUser();
+		 model.addAttribute("result", user);
+		 model.addAttribute("subject", "회원정보");
+		 
+//		 return newUserBO.getLastUser();
+		 return "lesson04/userInfo";
 	 }
+	 
+	 
 }
