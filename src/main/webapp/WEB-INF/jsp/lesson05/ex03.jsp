@@ -45,5 +45,6 @@
 	
 	<h2>String을 Date 객체로 변환</h2>
 	<fmt:parseDate value="${now }" pattern="yyyy/MM/dd hh:mm:ss" var="date" />
+	${date }
 </body>
 </html>

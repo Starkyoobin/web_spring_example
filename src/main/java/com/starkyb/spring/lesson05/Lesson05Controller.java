@@ -53,7 +53,7 @@ public class Lesson05Controller {
 	@GetMapping("/ex03")
 	public String ex03(Model model) {
 		Date today = new Date();
-		model.addAttribute(today);
+		model.addAttribute("today", today);
 		
 		return "lesson05/ex03";
 	}
