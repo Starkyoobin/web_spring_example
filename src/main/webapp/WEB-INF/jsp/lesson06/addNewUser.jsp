@@ -16,7 +16,10 @@
 		<h1>회원 정보 추가</h1>
 		
 		<!-- <form method="post" action="/lesson06/add_user" id="userForm"> -->
-			<label>이름</label> <input type="text" name="name" class="form-control" id="nameInput">
+			<div class="d-flex">
+				<label>이름</label> <input type="text" name="name" class="form-control" id="nameInput">
+				<button type="button" id="nameCheckBtn" class="btn btn-info">중복체크</button>
+			</div>
 			<label>생년월일</label> <input type="text" name="yyyymmdd" class="form-control" id="yyyymmddInput">
 			<label>이메일</label> <input type="text" name="email" class="form-control" id="emailInput">
 			<textarea rows="8" class="form-control" name="introduce" id="introduceInput"></textarea>
@@ -73,6 +76,35 @@
 					}
 				});
 			});
+			
+			$("#nameCheckBtn").on("click", function() {
+				var name = $("#nameInput").val();
+				
+				if(name == null || name == "") {
+					alert("이름을 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get",
+					url:"/lesson06/is_duplication",
+					data:{"name":name},
+					success:function(data) {
+						//data{"isDuplication":true}
+						//{"isDuplication":false}
+						if(data.isDuplication) {
+							alert("중복입니다!!");
+						} else {
+							alert("사용 가능합니다");
+						}
+					},
+					error:function(e) {
+						alert("error");
+					}
+				});			
+			});
+			
+			
 		});
 	</script>
 </body>

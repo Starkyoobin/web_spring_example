@@ -14,4 +14,7 @@ public interface NewUserDAO {
 			, @Param("email") String email);
 	
 	public NewUser selectLastUser();
+	
+	//name을 검색하고 그 결과 갯수를 알아온다
+	public int selectCountByName(@Param("name") String name);
 }

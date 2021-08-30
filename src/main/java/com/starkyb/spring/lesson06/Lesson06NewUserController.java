@@ -42,4 +42,20 @@ public class Lesson06NewUserController {
 		
 		return result;
 	}
+	
+	//파라미터로 전달된 name 값이 db에 이미 등록되어 있는지 여부 확인
+	@GetMapping("/is_duplication")
+	@ResponseBody
+	public Map<String, Boolean> isDuplication(
+			@RequestParam("name") String name) {
+		Map<String, Boolean> result = new HashMap<>();
+		
+		if(newUserBO.isDuplication(name)) {
+			result.put("isDuplication", true);
+		} else {
+			result.put("isDuplication", false);
+		}
+		
+		return result;
+	}
 }

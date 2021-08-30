@@ -18,4 +18,17 @@ public class NewUserBO {
 	public NewUser getLastUser() {
 		return newUserDAO.selectLastUser();
 	}
+	
+	//lesson06 중복인지 아닌지
+	public boolean isDuplication(String name) {
+		int count = newUserDAO.selectCountByName(name);
+		
+		if(count >= 1) {
+			return true;
+		} else {
+			return false;
+		}
+		
+//		return (count >= 1);
+	}
 }
