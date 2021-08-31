@@ -20,6 +20,8 @@
 				<label>이름</label> <input type="text" name="name" class="form-control" id="nameInput">
 				<button type="button" id="nameCheckBtn" class="btn btn-info">중복체크</button>
 			</div>
+			<div class="text-danger d-none" id="duplicateDiv"><small>중복된 이름입니다.</small></div>
+			<div class="text-success d-none" id="noneDuplicateDiv"><small>사용 가능합니다.</small></div>
 			<label>생년월일</label> <input type="text" name="yyyymmdd" class="form-control" id="yyyymmddInput">
 			<label>이메일</label> <input type="text" name="email" class="form-control" id="emailInput">
 			<textarea rows="8" class="form-control" name="introduce" id="introduceInput"></textarea>
@@ -30,6 +32,11 @@
 	
 	<script>
 		$(document).ready(function(){
+			//중복체크 여부 확인 변수
+			var isChecked = false;
+			//중복이 되었는지 안되었는지 확인 변수
+			var isDuplicate = true;
+		
 		//	$("#userForm").on("submit", function(e) {
 			$("#addBtn").on("click", function(e) {
 				e.preventDefault();
@@ -56,6 +63,18 @@
 				
 				if(introduce == null || introduce == "") {
 					alert("자기소개를 입력하세요");
+					return;
+				}
+				
+				//중복 체크 여부 유효성 검사
+				if(isChecked == false) {
+					alert("중복체크를 진행해주세요.");
+					return;
+				}
+				
+				//이름이 중복된 경우
+				if(isDuplicate == true) {
+					alert("중복된 이름은 입력할 수 없습니다.");
 					return;
 				}
 				
@@ -92,10 +111,16 @@
 					success:function(data) {
 						//data{"isDuplication":true}
 						//{"isDuplication":false}
+						isChecked = true;
+						alert(isDuplicate);
 						if(data.isDuplication) {
-							alert("중복입니다!!");
+							isDuplicate == true;
+							$("#duplicateDiv").removeClass("d-none");
+							$("#noneDuplicateDiv").addClass("d-none");							
 						} else {
-							alert("사용 가능합니다");
+							isDuplicate == false;
+							$("#noneDuplicateDiv").removeClass("d-none");
+							$("#duplicateDiv").addClass("d-none");
 						}
 					},
 					error:function(e) {
